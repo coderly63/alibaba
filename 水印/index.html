@@ -513,30 +513,30 @@
       <li>元素500</li>
     </ul>
   </div>
-  <script>
-    const setWatermark = (str) => {
-      const canvas = document.createElement("canvas")
-      const watermarkContent = document.createElement("div")
-      canvas.width = 220;
-      canvas.height = 100;
-      const context = canvas.getContext("2d")
-      context.rotate((-20 * Math.PI) / 180);
-      context.font = "17px Vedana"
-      context.fillStyle = "#bfbfbf"
-      context.fillText(str, 15, 40);
-      context.textAlign = "left"
-      context.textBaseline = "middle"
-      watermarkContent.style.cssText = [
-        'pointer-events: none;top: 20px;left: 0px;opacity: 0.2;position: absolute;zIndex:100000;',
-        `width:${document.documentElement.clientWidth - 10}px;`,
-        `height:${document.body.scrollHeight - 10}px;`,
-        `background: url(${canvas.toDataURL('image/png')}) left top repeat;`,
-      ].join('');
-
-      document.body.appendChild(watermarkContent)
-    }
-    setWatermark("fasdfasdfasldfjlas")
-  </script>
+  
 </body>
+<script>
+  const setWatermark = (str) => {
+    const canvas = document.createElement("canvas")
+    const watermarkContent = document.createElement("div")
+    canvas.width = 220;
+    canvas.height = 100;
+    const context = canvas.getContext("2d")
+    context.rotate((-20 * Math.PI) / 180);
+    context.font = "17px Vedana"
+    context.fillStyle = "#bfbfbf"
+    context.fillText(str, 15, 40);
+    context.textAlign = "left"
+    context.textBaseline = "middle"
+    watermarkContent.style.cssText = [
+      'pointer-events: none;top: 20px;left: 0px;opacity: 0.2;position: absolute;zIndex:100000;',
+      `width:${document.documentElement.clientWidth - 10}px;`,
+      `height:${document.body.scrollHeight - 10}px;`,
+      `background: url(${canvas.toDataURL('image/png')}) left top repeat;`,
+    ].join('');
 
+    document.body.appendChild(watermarkContent)
+  }
+  setWatermark("fasdfasdfasldfjlas")
+</script>
 </html>
