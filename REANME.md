@@ -5,6 +5,18 @@
 
 ## Hybrid
 
+在如今移动端盛行的年代，app都采用混合开发（hybrid），混合开发是一种开发模式，通常会涉及两种技术，web h5和native。
+
+* native主要是指IOS和Android，开发效率低，每次更新都需要重新打包整个APP，发布依赖用户的更新，并且要实现代码隔离，兼容不同版本
+* web开发和发布成本低，但是性能较低，因为JS为解释型语言，依赖于网络，第一次访问页面速度慢，有一个浏览器解析执行的过程。大量移动端功能无法实现，比如调用支付，二维码，相机等功能。强依赖与浏览器。
+
+#### JSBridge
+
+* 给 JavaScript 提供调用 Native 功能的接口，让前端更方便的调用地理位置，摄像头等
+* 核心是构建native和非native的桥梁，实现双向通信
+* JS可以从Native获取信息，比如登录信息。JS也可以调用Native功能。。。
+* 
+
 ## 服务端渲染
 
 传统CSR页面弊端：
@@ -23,6 +35,11 @@ SSR弊端：
 * 浏览器遇到没有defer和async的script标签时，会触发页面渲染
 * 如果前面有CSS资源，那么会等到CSS资源加载完后才会执行脚本（即使脚本已经加载完）
 
+## opacity和rgba区别
+
+* 父元素背景颜色设置透明度时，避免使用background：#000；opacity：0.5，建议使用background：rgba(0,0,0,0.5)
+* 因为子元素会继承父元素的opacity属性，我们让它不成为子元素。新增一个子元素，将其绝对定位到父元素位置，然后在该元素上设置背景色与透明度。
+
 ## 项目难点
 
 #### TimeLine时间线移动端高度问题
@@ -31,6 +48,22 @@ SSR弊端：
 * vue：通过ref获取DOM元素，进行遍历（通过offsetHeight或clientHeight获取高度），第一个与最后一个元素高度为一半，其余为自身高度。
 * 通过window.getComputedStyle获取除第一个元素的marginTop，与offsetHeight结合。得到TimeLine总高度
 * 难点：由于TimeLine时间线是通过伪类::after生成的，无法通过query获取，所以高度难以通过JS或动态改变类名实现，后使用:style={"--xxx": xxx}动态为CSS增加全局样式变量，并在style中通过var()获取变量值完成TimeLine时间线高度设置。
+
+```js
+let totalHeight = 0
+for (let i = 0; i < liList.length; i++) {
+    // 如果是第一个或最后一个元素 则高度为一半
+    if (i === 0 || i === liList.length - 1)
+        totalHeight += liList[i].offsetHeight / 2
+    else totalHeight += liList[i].offsetHeight
+    // 获取li的margin
+    if (i !== 0)
+        totalHeight += parseInt(getComputedStyle(liList[i]).marginTop)
+}
+this.stepHeight = totalHeight
+```
+
+
 
 #### 同时请求多张图片
 
@@ -60,6 +93,13 @@ SSR弊端：
 #### 移动端适配
 
 * 通过clientWidth或者innerWidth获取移动端宽度
-* 再用clientWidth / 设计稿的宽度得到的值赋给根元素的font-size
+* 再用clientWidth / 设计稿的宽度*100得到的值赋给根元素的font-size
 * 后面所有大小均为设计稿中元素长度/100 rem即可实现移动端适配
 * 如今更推荐vw，vh实现适配
+
+#### hybrid下路由问题
+
+* 路由跳转时，新路由很多功能错误，比如登录状态，会员信息等
+* 由于混合开发下，跳转路由时需要新开一个界面，之前从vuex中获取的数据将为默认值，所以信息错误
+* 将某些必要的参数通过params拼接在url上，新界面通过route拿到params就可以获取数据
+* 而用户信息等较为复杂的信息，则通过重新调佣bridge拿到
