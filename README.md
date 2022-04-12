@@ -1,7 +1,11 @@
-## vue 性能问题
+## 打包优化
 
-- 由于 vue 在生成依赖的时候通过 Object.defineProperty（Proxy）实现响应式，每次取变量值的时候都需要通过 vm.getter 取值，当在 computed 或者 template 中取 data 中的值时，某些情况会造成性能浪费，比如在 for 循环中取 data 中的值，如 arr 数组。
-- 优化：解构赋值，声明一个变量保存 data 中的值
+* 路由懒加载（基本使用）
+* 将图片在压缩网站压缩
+* 使用CDN静态资源（字体，较大图片）
+* 图片使用雪碧图（background设置背景）
+* 通过`configureWebpack`函数式在`vue.config.js`中判断当前环境用哪些插件（如prod模式去除vconsole移动端调试插件）
+* 开启GZIP压缩（`compression-webpack-plugin`）
 
 ## Hybrid
 
@@ -38,6 +42,30 @@ SSR 弊端：
 
 - 父元素背景颜色设置透明度时，避免使用 background：#000；opacity：0.5，建议使用 background：rgba(0,0,0,0.5)
 - 因为子元素会继承父元素的 opacity 属性，我们让它不成为子元素。新增一个子元素，将其绝对定位到父元素位置，然后在该元素上设置背景色与透明度。
+
+## 屏幕取词
+
+* 通过`document.caretRangeFromPoint`获取指定坐标下文档片段的Range对象
+* 
+
+## Vue项目自定义指令自动注入
+
+```js
+const componentsContext = require.context('./', true, /\.js$/);
+
+export default {
+  install(app) {
+    componentsContext.keys().forEach((component) => {
+      const componentConfig = componentsContext(component);
+      const ctrl = componentConfig.default || componentConfig;
+      app.directive(ctrl.name, ctrl)
+    });
+  },
+}
+
+```
+
+
 
 ## 项目难点
 
@@ -236,3 +264,41 @@ window.scrollTo({
   behavior: 'smooth',
 })
 ```
+
+#### Android7白屏问题
+
+* 最开始不适配android低端机
+* vuex4.0.0以上版本有bug，引入报错，引起白屏，回退到4.0.0即可解决
+* vant开源组件库以及swiper有未经babel转化的es6代码
+
+解决方式：
+
+* package.json修改vuex版本，重新install
+
+* vue.config.js对开源组件库进行babel转化
+
+```js
+    config.module
+      .rule("compile")
+      .test(/\.js$/)
+      .include.add(resolve("./node_modules/vant"))
+      .add(resolve("./node_modules/swiper"))
+      .end()
+      .use("babel")
+      .loader("babel-loader")
+      .options({
+        presets: [["@babel/preset-env", { modules: false }]],
+      });
+```
+
+
+
+#### 路由history模式打包空白
+
+* 由于开启history模式后，打包后会出现白屏现象
+* 原因是history模式下服务器接收该请求后，会去寻找该地址，但是由于该地址在服务器中不存在，所以会白屏，找不到资源
+
+解决方式：
+
+1. 将mode切换回hash
+2. 在服务器中添加一个回退路由，也就是遇到不存在的请求时，直接返回index.html，该页面会自动根据路由进行匹配，展示相关组件
