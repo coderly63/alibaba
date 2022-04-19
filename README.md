@@ -302,3 +302,22 @@ window.scrollTo({
 
 1. 将mode切换回hash
 2. 在服务器中添加一个回退路由，也就是遇到不存在的请求时，直接返回index.html，该页面会自动根据路由进行匹配，展示相关组件
+
+#### vue中打开新的界面
+
+* 由于弹窗后可能继续有弹窗，所以采用新窗口的方式
+* 后经过测试，创建一个a标签，target属性设置为_target（新界面）
+
+```js
+  let url = `${window.location.href.split('#')[0]}#${path}?`
+  Object.keys(query).forEach((key) => {
+    if (key && query[key] !== undefined) {
+      url += `${key}=${query[key]}&`
+    }
+  })
+  const a = document.createElement('a')
+  a.target = '_blank'
+  a.href = url
+  a.click()
+```
+

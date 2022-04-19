@@ -1,5 +1,2 @@
-/**
- * @param {number} n
- * @return {number}
- */
-var countNumbersWithUniqueDigits = function (n) {};
+console.log(typeof null);
+console.log(typeof undefined);

@@ -50,10 +50,16 @@ function onClick(event) {
     wordArr.unshift(data[left]);
     left -= 1;
   }
+  left += 1
+  // 获取选区
   range.setStart(range.startContainer, left);
   range.setEnd(range.startContainer, right);
+  const s = window.getSelection()
   console.log("new range: ", range);
   console.log("wordArr: ", wordArr.join(""));
+  s.removeAllRanges()
+  s.addRange(range)
+  console.log(s);
 }
 </script>
 <style>
