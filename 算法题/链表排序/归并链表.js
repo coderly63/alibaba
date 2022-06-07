@@ -34,7 +34,7 @@ console.log("head2", head2)
 const mergeList = function (head, tail) {
   if (head === null) return head;
   if (head.next === tail) {
-    // head.next = null;
+    head.next = null;
     return head;
   }
   let fast = head;

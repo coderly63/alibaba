@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "babel-types": "^6.26.0",
+    "babylon": "^6.18.0",
     "crypto": "^1.0.1"
   },
   "devDependencies": {
