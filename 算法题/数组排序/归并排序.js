@@ -1,6 +1,4 @@
 var merge = function (left, right) {
-  console.log("🚀 ~ file: 归并排序.js ~ line 2 ~ merge ~ right", right);
-  console.log("🚀 ~ file: 归并排序.js ~ line 2 ~ merge ~ left", left);
   const res = [];
   while (left.length && right.length) {
     if (left[0] < right[0]) res.push(left.shift());

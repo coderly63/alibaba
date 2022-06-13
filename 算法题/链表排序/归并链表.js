@@ -3,8 +3,6 @@ function ListNode(val, next) {
   this.next = next === undefined ? null : next;
 }
 const merge = function (head1, head2) {
-console.log("head1", head1)
-console.log("head2", head2)
   const head0 = new ListNode(0);
   let tmp = head0,
     tmp1 = head1,
@@ -19,22 +17,14 @@ console.log("head2", head2)
     }
     tmp = tmp.next;
   }
-  while (tmp1 !== null) {
-    tmp.next = tmp1;
-    tmp1 = tmp1.next;
-    tmp = tmp.next
-  }
-  while (tmp2 !== null) {
-    tmp.next = tmp2;
-    tmp2 = tmp2.next;
-    tmp = tmp.next
-  }
+  if (tmp1 !== null) tmp.next = tmp1;
+  if (tmp2 !== null) tmp.next = tmp2;
   return head0.next;
 };
 const mergeList = function (head, tail) {
   if (head === null) return head;
   if (head.next === tail) {
-    // head.next = null;
+    head.next = null;
     return head;
   }
   let fast = head;
