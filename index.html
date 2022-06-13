@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <form id="form" method="post" action="http://localhost:3000/api">
-        <input type="text" id="name" name="name" />
-        <input type="text" id="age" name="age" />
-        <input type="file" id="img">
-        <input id="save-btn" type="submit" value="保存" />
+      <input type="text" id="name" name="name" />
+      <input type="text" id="age" name="age" />
+      <input type="file" id="img" />
+      <input id="save-btn" type="submit" value="保存" />
     </form>
-</body>
-<script>
-    const img = document.querySelector("#img")
-    img.onchange = () => {
-        console.dir(img);
-        const file = img.files[0];
-        // const reader = new FileReader()
-        // reader.readAsDataURL(file)
-        // reader.onload = (e) => {
-        //     console.log(e.target.result);
-        // }
-        const preview = window.URL.createObjectURL(file)
-        console.log(preview);
-    }
-</script>
+  </body>
+  <script>
+    function A() {}
+    const a = new A()
+    console.log(a);
+    A.prototype.age = 'Tom'
+    console.log(A);
+    console.log(A.age);
+    console.log(A.name)
 
+    // Object.defineProperty(A.prototype, 'name', {
+    //   set() {
+    //     this._name = 'Jerry'
+    //     console.log(this)
+    //   },
+    //   get() {
+    //     return 99
+    //   },
+    // })
+
+    // A.prototype.name = 'coder'
+    // console.log(A.prototype.name)
+  </script>
 </html>
