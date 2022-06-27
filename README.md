@@ -1,11 +1,26 @@
 ## 打包优化
 
 * 路由懒加载（基本使用）
+
 * 将图片在压缩网站压缩
+
 * 使用CDN静态资源（字体，较大图片）
+
 * 图片使用雪碧图（background设置背景）
+
 * 通过`configureWebpack`函数式在`vue.config.js`中判断当前环境用哪些插件（如prod模式去除vconsole移动端调试插件）
+
 * 开启GZIP压缩（`compression-webpack-plugin`）
+
+* 通过`webpack-bundle-analyzer`对打包体积进行优化，发现常见的日期处理函数`Moment.js`（处理几小时前，几分钟前）占570kb左右（优化后140kb左右）
+
+  * 该库如此大的原因是有许多语言资源文件，用于转化成多国的时间格式。此项目不需要这么多格式，因此使用webpack插件`IgnorePlugin`，对`local`文件夹不执行打包。
+
+  * 项目中导入需要的语言包即可
+
+  * ```js
+    import 'moment/locale/zh-cn' // 中文
+    ```
 
 ## Hybrid
 
@@ -37,6 +52,9 @@ SSR 弊端：
 - JS 会阻塞 DOM 解析
 - 浏览器遇到没有 defer 和 async 的 script 标签时，会触发页面渲染
 - 如果前面有 CSS 资源，那么会等到 CSS 资源加载完后才会执行脚本（即使脚本已经加载完）
+- 接收到文档后，渲染引擎会对HTML文档进行解析生成DOM树、对CSS文件进行解析生成CSSOM树；同时执行页面中的JavaScript代码；最终根据DOM树和CSSOM树，计算样式（Caluclate Style）生成渲染树，渲染树中，只会包含即将显示在页面中的元素及其样式信息（如head元素、display为hidden的元素就不会包含在渲染树中）；根据渲染树需要进行布局（layout）来计算每个元素在页面上的位置；
+
+  接下来渲染引擎开始进行绘制（paint），这一步分为若干阶段：根据渲染树将每层（layer）的各个元素绘制，然后将绘制出的若干连续图像进行栅格化（Rasterization），最后将栅格化后的图像合成（composite）为要显示在屏幕上的图像。对每一层的绘制是由浏览器来完成的；最后的合成是由GPU来完成；而栅格化过程取决于浏览器的设置，chrome默认开启GPU栅格化，否则由CPU进行。
 
 ## opacity 和 rgba 区别
 
@@ -320,4 +338,3 @@ window.scrollTo({
   a.href = url
   a.click()
 ```
-

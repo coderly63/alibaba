@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "clipboard": "^2.0.4",
     "vue": "^3.2.25"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.0",
+    "sass": "^1.52.3",
     "vite": "^2.9.0"
   }
 }

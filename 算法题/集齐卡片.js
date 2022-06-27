@@ -61,7 +61,7 @@ var collectCard = function (cardArr) {
 //   collectCard(["000", "012", "222", "333", "444", "555", "345", "678", "789"])
 // );
 // 二进制方式
-// 123 => 14 000 => 1 012 => 6 ... n => 1 << n
+// 123 => 14 000 => 1 012 => 7 ... n => 1 << n
 var collectCardBinary = function (cardArr) {
   const toBinary = function (s) {
     let res = 0;
