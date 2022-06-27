@@ -1,4 +1,4 @@
-for (let i = 0; i < 5; i++) {
-  if (i === 0) continue;
-  console.log(i);
-}
+const str = "   this    is a   dog".trim()
+const arr = str.split(/\s+/)
+console.log('arr', arr)
+console.log(arr.reverse().join(""));

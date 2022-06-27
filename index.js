@@ -1,1 +1,1 @@
-console.log(decodeURIComponent('考研'));
+console.log(328 & 1);
