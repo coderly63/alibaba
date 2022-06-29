@@ -1,4 +1,2 @@
-const str = "   this    is a   dog".trim()
-const arr = str.split(/\s+/)
-console.log('arr', arr)
-console.log(arr.reverse().join(""));
+const arr = [1, 23, 34, 52, 456, 346]
+console.log(arr[10] < 3);
