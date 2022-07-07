@@ -8,29 +8,20 @@
   </head>
   <body>
     <script>
-      function debounce(fn, delay) {
-        let timer = null;
-        return function () {
-          if (timer) clearTimeout(timer);
-          const context = this;
-          console.log(this);
-          const args = [...arguments];
-          timer = setTimeout(() => {
-            console.log(this);
-            fn.apply(context, args);
-          }, delay);
-        };
+      var triangle = { a: 1, b: 2, c: 3 }
+
+      function ColoredTriangle() {
+        this.color = 'red'
       }
 
-      function func() {
-        console.log(123);
+      // ColoredTriangle.prototype = triangle
+
+      var obj = new ColoredTriangle()
+      console.log('obj', obj)
+
+      for (var prop in obj) {
+        console.log(`obj.${prop} = ${obj[prop]}`)
       }
-      const a = {
-        0: 123,
-        1: 456,
-      };
-      const debounceFunc = debounce(func, 200);
-      debounceFunc.apply(a, [1, 2, 3]);
     </script>
   </body>
 </html>

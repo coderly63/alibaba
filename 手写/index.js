@@ -1,13 +1,4 @@
-const p = new Promise((resolve, reject) => {
-  const n = Math.floor(Math.random() * 100);
-  if (n % 2 === 0) resolve(n);
-  else reject(n);
-});
-p.then(
-  (res) => {
-    console.log(res);
-  },
-  (error) => {
-    console.log("error", error);
-  }
-);
+const arr = [1, 123, 3523, 2345, 1234, 23]
+const iteratorObj = arr[Symbol.iterator]
+console.log(iteratorObj)
+iteratorObj.next()
