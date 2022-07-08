@@ -11,8 +11,21 @@
  * @return {TreeNode[]}
  */
 var generateTrees = function (n) {
-  const res = []
-  const dfs = function (n) {
-    if (n === 0) return 
+  if (n === 0) return []
+  const dfs = function (start, end) {
+    const res = []
+    if (start > end) return [null]
+    for (let i = start; i <= end; i++) {
+      const left = dfs(start, i - 1)
+      const right = dfs(i + 1, end)
+      for (const l of left) {
+        for (const r of right) {
+          const root = new TreeNode(i, l, r)
+          res.push(root)
+        }
+      }
+    }
+    return res
   }
+  return dfs(1, n)
 }

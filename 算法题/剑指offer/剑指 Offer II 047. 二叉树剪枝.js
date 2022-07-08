@@ -12,14 +12,8 @@
  */
 var pruneTree = function (root) {
   if (!root) return root
-  const checkTreeDelete = function (root) {
-    if (
-      !root ||
-      (root.val === 0 &&
-        checkTreeDelete(root.left) &&
-        checkTreeDelete(root.right))
-    )
-      return true
-    else return false
-  }
+  root.left = pruneTree(root.left)
+  root.right = pruneTree(root.right)
+  if (root.val === 0 && !root.left && !root.right) return null
+  return root
 }
