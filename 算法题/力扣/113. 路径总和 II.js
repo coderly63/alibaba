@@ -12,25 +12,22 @@
  * @return {number[][]}
  */
 var pathSum = function (root, targetSum) {
-  const res = [];
-  const arr = [];
-  const dfs = function (root, curSum) {
-    if (!root) return;
-    arr.push(root.val);
-    const sum = curSum + root.val;
-    if (sum === targetSum && !root.left && !root.right) {
-      const tmp = [...arr];
-      res.push(tmp);
-    }
+  const res = []
+  if (!root) return res
+  const dfs = function (root, target, path) {
+    if (!root) return
+    if (!root.left && !root.right && target === root.val) res.push([...path])
     if (root.left) {
-      dfs(root.left, sum);
-      arr.pop();
+      path.push(root.left.val)
+      dfs(root.left, target - root.val, path)
+      path.pop()
     }
     if (root.right) {
-      dfs(root.right, sum);
-      arr.pop();
+      path.push(root.right.val)
+      dfs(root.right, target - root.val, path)
+      path.pop()
     }
-  };
-  dfs(root, 0);
-  return res;
-};
+  }
+  dfs(root, targetSum, [root.val])
+  return res
+}
