@@ -6,37 +6,26 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
-function TreeNode(val, left, right) {
-  this.val = val === undefined ? 0 : val
-  this.left = left === undefined ? null : left
-  this.right = right === undefined ? null : right
-}
 /**
  * @param {number} n
  * @return {TreeNode[]}
  */
-const generateTrees = (n) => {
-  if (n == 0) return []
-  const getAllBSTs = (low, high) => {
-    if (low > high) return [null]
-    if (low == high) return [new TreeNode(low)]
+var generateTrees = function (n) {
+  if (n === 0) return []
+  const dfs = function (start, end) {
     const res = []
-    for (let i = low; i <= high; i++) {
-      const leftBSTs = getAllBSTs(low, i - 1)
-      const rightBSTs = getAllBSTs(i + 1, high)
-      for (const leftBST of leftBSTs) {
-        for (const rightBST of rightBSTs) {
-          const root = new TreeNode(i)
-          root.left = leftBST
-          root.right = rightBST
+    if (start > end) return [null]
+    for (let i = start; i <= end; i++) {
+      const left = dfs(start, i - 1)
+      const right = dfs(i + 1, end)
+      for (const l of left) {
+        for (const r of right) {
+          const root = new TreeNode(i, l, r)
           res.push(root)
         }
       }
     }
     return res
   }
-  return getAllBSTs(1, n)
+  return dfs(1, n)
 }
-
-
-console.log(generateTrees(3));

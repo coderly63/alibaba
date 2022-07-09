@@ -1,2 +1,4 @@
-const a = (0.1 * 10 + 0.2 *10) / 10  // 0.3
+if ("a" in window) {
+  var a = 1
+}
 console.log(a);
