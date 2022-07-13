@@ -1,15 +1,7 @@
-const sum = function () {
-  const args1 = [...arguments]
-  let res = args1.reduce((pre, cur) => pre + cur)
-  function add() {
-    const args2 = [...arguments]
-    if (!args2.length) return res
-    else {
-      res += args2.reduce((pre, cur) => pre + cur)
-      return add
-    }
-  }
-  return add
-}
-
-console.log(sum(1, 14, 7)(22)(33)())
+const a = '123'
+const b = new Number(123)
+const c = new String('123')
+const d = Symbol(123)
+console.log(c instanceof String);
+console.log(typeof a, typeof c);
+console.log(d, typeof d);

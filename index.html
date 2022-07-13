@@ -16,25 +16,11 @@
     </form>
   </body>
   <script>
-    function A() {}
-    const a = new A()
-    console.log(a);
-    A.prototype.age = 'Tom'
-    console.log(A);
-    console.log(A.age);
-    console.log(A.name)
-
-    // Object.defineProperty(A.prototype, 'name', {
-    //   set() {
-    //     this._name = 'Jerry'
-    //     console.log(this)
-    //   },
-    //   get() {
-    //     return 99
-    //   },
-    // })
-
-    // A.prototype.name = 'coder'
-    // console.log(A.prototype.name)
+    const a = '123'
+    console.log('a', a)
+    const b = new Number(123)
+    const c = new String('123')
+    console.log('c', c)
+    console.log(c instanceof String)
   </script>
 </html>

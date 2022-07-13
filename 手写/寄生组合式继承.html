@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Son (name) {
+        this.name = name
+      }
+      Son.prototype.eat = function () {
+        console.log('son is eating');
+      }
+      const s1 = new Son('dw')
+      console.log('s1', s1)
+      function Father (name, age) {
+        Son.call(this, name)
+        this.age = age
+      }
+      Father.prototype.say = function () {
+        console.log('father is saying');
+      }
+      const proto = Object.create(Son.prototype)
+      proto.constructor = Son
+      Father.prototype = proto
+      console.log('proto', proto)
+      const f1 = new Father('Tom', 35)
+      console.log('f1', f1)
+    </script>
+  </body>
+</html>

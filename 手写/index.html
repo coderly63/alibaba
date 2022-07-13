@@ -8,20 +8,13 @@
   </head>
   <body>
     <script>
-      var triangle = { a: 1, b: 2, c: 3 }
-
-      function ColoredTriangle() {
-        this.color = 'red'
+      function Person (name) {
+        this.name = name
       }
-
-      // ColoredTriangle.prototype = triangle
-
-      var obj = new ColoredTriangle()
-      console.log('obj', obj)
-
-      for (var prop in obj) {
-        console.log(`obj.${prop} = ${obj[prop]}`)
-      }
+      console.log(Person.prototype);
+      const p = new Person('Tom')
+      console.log(p);
+      console.log(name);
     </script>
   </body>
 </html>
