@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
 
-  <body>
-    <form id="form" method="post" action="http://localhost:3000/api">
-      <input type="text" id="name" name="name" />
-      <input type="text" id="age" name="age" />
-      <input type="file" id="img" />
-      <input id="save-btn" type="submit" value="保存" />
-    </form>
-  </body>
-  <script>
-    const a = '123'
-    console.log('a', a)
-    const b = new Number(123)
-    const c = new String('123')
-    console.log('c', c)
-    console.log(c instanceof String)
-  </script>
+  <style>
+
+    /*Flex 容器*/
+    .flex__container {
+      display: inline-flex;
+      background-color: gray;
+    }
+
+    /*Flex 子 Item */
+    .flex__item {
+      width: 50px;
+      height: 50px;
+
+      background-color: aqua;
+      border: 1px solid black;
+    }
+
+  </style>
+</head>
+<body>
+
+<!--Flex容器-->
+<div class="flex__container">
+
+  <!--Flex容器中的子Item-->
+  <div class="flex__item"></div>
+  <div class="flex__item"></div>
+  <div class="flex__item"></div>
+  <div class="flex__item"></div>
+</div>
+
+</body>
 </html>
+
