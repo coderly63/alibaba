@@ -5,36 +5,42 @@
   <title>Title</title>
 
   <style>
-
-    /*Flex 容器*/
-    .flex__container {
-      display: inline-flex;
-      background-color: gray;
+    /* .container {
+      display: flex;
+      height: 100vh;
+      flex-direction: column;
     }
-
-    /*Flex 子 Item */
-    .flex__item {
-      width: 50px;
-      height: 50px;
-
+    .top {
+      height: 300px;
+      width: 100%;
       background-color: aqua;
-      border: 1px solid black;
     }
-
+    .bottom {
+      height: 200px;
+      width: 100%;
+      background-color: red;
+    }
+    .center {
+      width: 100%;
+      flex: 1;
+      background-color: black;
+    } */
   </style>
 </head>
 <body>
-
-<!--Flex容器-->
-<div class="flex__container">
-
-  <!--Flex容器中的子Item-->
-  <div class="flex__item"></div>
-  <div class="flex__item"></div>
-  <div class="flex__item"></div>
-  <div class="flex__item"></div>
+<div class="container">
+  <div class="top"></div>
+  <div class="center"></div>
+  <div class="bottom"></div>
 </div>
-
 </body>
+<script>
+  function test () {
+    const a = 3
+    return a
+  }
+  const b = test()
+  console.log(b);
+</script>
 </html>
 
