@@ -13,6 +13,7 @@ var heapify = function (arr, i, length) {
     if (arr[j] > tmp) {
       swap(arr, i, j)
       i = j
+      heapify(arr, i, length)
     } else break
   }
 }

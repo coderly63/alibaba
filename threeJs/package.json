@@ -1,0 +1,14 @@
+{
+  "name": "threeJs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5",
+    "three": "^0.142.0"
+  },
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel src/index.html"
+  }
+}

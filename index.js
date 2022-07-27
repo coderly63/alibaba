@@ -1,7 +1,8 @@
-const a = '123'
-const b = new Number(123)
-const c = new String('123')
-const d = Symbol(123)
-console.log(c instanceof String);
-console.log(typeof a, typeof c);
-console.log(d, typeof d);
+var isSymmetric = function (root) {
+  function check(p, q) {
+    if (!p && !q) return true
+    else if (!p || !q) return false
+    return p.val === q.val && check(p.left, q.right) && check(p.right && q.left)
+  }
+  return check(root, root)
+};
