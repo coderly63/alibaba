@@ -1,1 +1,1 @@
-console.log('a'.charCodeAt());
+console.log(1 << 2);
