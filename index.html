@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
 
-  <style>
-    /* .container {
+    <style>
+      /* .container {
       display: flex;
       height: 100vh;
       flex-direction: column;
@@ -25,22 +25,26 @@
       flex: 1;
       background-color: black;
     } */
-  </style>
-</head>
-<body>
-<div class="container">
-  <div class="top"></div>
-  <div class="center"></div>
-  <div class="bottom"></div>
-</div>
-</body>
-<script>
-  function test () {
-    const a = 3
-    return a
-  }
-  const b = test()
-  console.log(b);
-</script>
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="top"></div>
+      <div class="center"></div>
+      <div class="bottom"></div>
+    </div>
+  </body>
+  <script>
+    const obj = {
+      a: 123,
+      b: 321,
+    }
+    function create(obj) {
+      function F() {}
+      F.prototype = obj
+      return new F()
+    }
+    console.log(create(obj));
+    console.log(Object.create(obj));
+  </script>
 </html>
-
