@@ -13,21 +13,14 @@
  */
 var pathSum = function (root, targetSum) {
   const res = []
-  if (!root) return res
-  const dfs = function (root, target, path) {
+  const dfs = function (root, path, target) {
     if (!root) return
-    if (!root.left && !root.right && target === root.val) res.push([...path])
-    if (root.left) {
-      path.push(root.left.val)
-      dfs(root.left, target - root.val, path)
-      path.pop()
-    }
-    if (root.right) {
-      path.push(root.right.val)
-      dfs(root.right, target - root.val, path)
-      path.pop()
-    }
+    path.push(root.val)
+    if (root.val === target && !root.left && !root.right) res.push([...path])
+    dfs(root.left, path, target - root.val)
+    dfs(root.right, path, target - root.val)
+    path.pop()
   }
-  dfs(root, targetSum, [root.val])
+  dfs(root, [], targetSum)
   return res
-}
+};

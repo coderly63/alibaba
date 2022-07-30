@@ -23,7 +23,6 @@ var reverseList = function (head) {
 var reverseList = function (head) {
   if (!head.next || !head) return head
   const pre = reverseList(head.next)
-  console.log('reverseList ~ pre', pre)
   head.next.next = head
   head.next = null
   return pre
