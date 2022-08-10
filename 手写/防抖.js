@@ -3,9 +3,7 @@ function debounce(fn, delay) {
   return function () {
     if (timer) clearTimeout(timer);
     const context = this;
-    console.log("🚀 ~ file: 防抖.js ~ line 6 ~ context", context);
     const args = [...arguments];
-    console.log("🚀 ~ file: 防抖.js ~ line 8 ~ args", args);
     timer = setTimeout(() => {
       fn.apply(context, args);
     }, delay);
