@@ -5,46 +5,19 @@
     <title>Title</title>
 
     <style>
-      /* .container {
-      display: flex;
-      height: 100vh;
-      flex-direction: column;
-    }
-    .top {
-      height: 300px;
-      width: 100%;
-      background-color: aqua;
-    }
-    .bottom {
-      height: 200px;
-      width: 100%;
-      background-color: red;
-    }
-    .center {
-      width: 100%;
-      flex: 1;
-      background-color: black;
-    } */
+      .triangle {
+        margin: 100px;
+        width: 160px;
+        height: 200px;
+        background-color: skyblue;
+        clip-path: polygon(0 0, 0% 100%, 100% 50%);
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="top"></div>
-      <div class="center"></div>
-      <div class="bottom"></div>
+      <div class="triangle"></div>
     </div>
   </body>
-  <script>
-    const obj = {
-      a: 123,
-      b: 321,
-    }
-    function create(obj) {
-      function F() {}
-      F.prototype = obj
-      return new F()
-    }
-    console.log(create(obj));
-    console.log(Object.create(obj));
-  </script>
+  <script></script>
 </html>

@@ -1,35 +1,23 @@
 [
   {
-    "planName": "网易严选联合会员",
-    "list": [
+    "title": "android",
+    "list":[
       {
-        "income": 30,
-        "count": 6
+        "month": "2022-11-9"
       },
       {
-        "income": 23,
-        "count": 2
-      },
-      {
-        "income": 87,
-        "count": 1
+        "month": "2022-11-9"
       }
     ]
   },
   {
-    "planName": "连续包月",
-    "list": [
+    "title": "ios",
+    "list":[
       {
-        "income": 30,
-        "count": 6
+        "month": "2022-11-9"
       },
       {
-        "income": 23,
-        "count": 2
-      },
-      {
-        "income": 87,
-        "count": 1
+        "month": "2022-11-9"
       }
     ]
   }
