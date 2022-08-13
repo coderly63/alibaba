@@ -35,16 +35,14 @@
     </div>
   </body>
   <script>
-    const obj = {
-      a: 123,
-      b: 321,
-    }
-    function create(obj) {
-      function F() {}
-      F.prototype = obj
-      return new F()
-    }
-    console.log(create(obj));
-    console.log(Object.create(obj));
+    var name = 1
+    console.log(this);
+    ;(function () {
+      console.log(name + this.name) // browser: -> 'undefined1'; Node.js: -> NaN
+      console.log('name', typeof name)
+      console.log('this.name', typeof this.name)
+      var name = '2'
+      console.log(name + this.name) // browser: -> '21'; Node.js: -> '2undefined'
+    })()
   </script>
 </html>
