@@ -10,7 +10,7 @@ var permuteUnique = function (nums) {
   const dfs = function (visit, path) {
     if (path.length === n) res.push([...path])
     for (let i = 0; i < n; i++) {
-      if (i !== 0 && nums[i] === nums[i - 1] && visit[i - 1]) continue
+      if (i !== 0 && nums[i] === nums[i - 1] && !visit[i - 1]) continue
       if (visit[i]) continue
       visit[i] = 1
       path.push(nums[i])
@@ -22,3 +22,5 @@ var permuteUnique = function (nums) {
   dfs(visit, [])
   return res
 }
+
+console.log(permuteUnique([1, 2, 2]))

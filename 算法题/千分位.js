@@ -10,13 +10,11 @@ var formate = function (n) {
   console.log(stack.reverse().join('') + '.' + nums[1])
 }
 
-
 var formate = function (n) {
   const str = String(n)
   const res = str.replace(/^(-?)(\d+)(\.?(\d*))$/, (match, s1, s2, s3) => {
-    console.log(s1);
-    console.log(s2);
-    console.log(s3);
+    const t = s2.replace(/\d{1,3}(?=(\d{3})+$)/g, '$&,')
+    console.log(t);
   })
 }
 
