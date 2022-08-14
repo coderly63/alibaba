@@ -1,19 +1,9 @@
-const p = new Promise((resolve, reject) => {
-  reject(6)
+setImmediate(() => {
+  console.log(1);
 })
-  .then(
-    (res) => {
-      console.log('res1', res)
-    },
-    (err) => {
-      console.log('err1', err)
-    }
-  )
-  .then(
-    (res) => {
-      console.log('res2', res)
-    },
-    (err) => {
-      console.log('err2', err)
-    }
-  )
+
+setTimeout(() => {
+  console.log(2);
+});
+
+console.log(3);

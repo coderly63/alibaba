@@ -1,26 +1,27 @@
-<<<<<<< HEAD
-=======
-function foo(n) {
-  const nums = String(n).split('.')
-  const stack = []
-  const s = nums[0]
-  let index = 0
-  for (let i = s.length - 1; i >= 0; i--) {
-    if (i !== s.length - 1 && index % 3 === 0) stack.push(',')
-    index += 1
-    stack.push(s[i])
+const swap = function (arr, i, j) {
+  arr[i] = arr[i] ^ arr[j]
+  arr[j] = arr[i] ^ arr[j]
+  arr[i] = arr[i] ^ arr[j]
+}
+const heapify = function (arr, i, length) {
+  for (let j = 2 * i + 1; j < length; j = 2 * j + 1) {
+    if (j + 1 < length && arr[j + 1] > arr[j]) j += 1
+    if (arr[j] <= arr[i]) break
+    swap(arr, i, j)
+    i = j
   }
-  console.log(stack)
-  return stack.reverse().join('') + '.' + nums[1]
 }
-
-function bar(n) {
-  const s = String(n)
-  let res
-  s.replace(/^(-?)(\d*)((\.)?\d*)/g, (match, s1, s2, s3) => {
-    res = s1 + s2.replace(/\d{1,3}(?=(\d{3})+$)/g, '$&,') + s3
-  })
-  return res
+const heapsort = function (arr) {
+  let n = arr.length
+  for (let i = Math.floor(n / 2); i >= 0; i--) {
+    heapify(arr, i, n)
+  }
+  while (n > 1) {
+    n -= 1
+    swap(arr, 0, n)
+    heapify(arr, 0, n)
+  }
+  return arr
 }
-console.log(bar(-1234567890.123))
->>>>>>> 5e0632814e90ee814423ca00c0b1d7f63a910fd8
+const arr = [1, 3, 5, 7, 2, 4, 6, 8]
+console.log(heapsort(arr));
