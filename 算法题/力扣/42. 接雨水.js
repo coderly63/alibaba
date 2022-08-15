@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var trap = function (height) {
+  
+}
+=======
 function trap(height) {
   const n = height.length
   const stack = []
@@ -38,3 +47,4 @@ var trap2 = function (height) {
 }
 
 console.log(trap2([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
+>>>>>>> 5e0632814e90ee814423ca00c0b1d7f63a910fd8

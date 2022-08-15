@@ -5,39 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="./promise.js"></script>
   </head>
   <body>
     <div class="test abc">ooo</div>
     <script>
-      // ;(function () {
-      //   if (!window.localStorage) {
-      //     console.log('当前浏览器不支持localStorage!')
-      //   }
-      //   var test = '0123456789'
-      //   var add = function (num) {
-      //     num += num
-      //     if (num.length == 10240) {
-      //       test = num
-      //       return
-      //     }
-      //     add(num)
-      //   }
-      //   add(test)
-      //   var sum = test
-      //   var show = setInterval(function () {
-      //     sum += test
-      //     try {
-      //       window.localStorage.removeItem('test')
-      //       window.localStorage.setItem('test', sum)
-      //       console.log(sum.length / 1024 + 'KB')
-      //     } catch (e) {
-      //       alert(sum.length / 1024 + 'KB超出最大限制')
-      //       clearInterval(show)
-      //     }
-      //   }, 20)
-      // })()
-      const test = document.getElementsByClassName('test')
-      console.log('test', test)
+      const p = new Promise((resolve, reject) => {
+        reject(6)
+      })
+        .then(
+          (res) => {
+            console.log('res1', res)
+          },
+          (err) => {
+            console.log('err1', err)
+          }
+        )
+        .then(
+          (res) => {
+            console.log('res2', res)
+          },
+          (err) => {
+            console.log('err2', err)
+          }
+        )
     </script>
   </body>
 </html>
