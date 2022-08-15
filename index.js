@@ -1,23 +1,98 @@
-function foo(n) {
-  const nums = String(n).split('.')
-  const stack = []
-  const s = nums[0]
-  let index = 0
-  for (let i = s.length - 1; i >= 0; i--) {
-    if (i !== s.length - 1 && index % 3 === 0) stack.push(',')
-    index += 1
-    stack.push(s[i])
+function jsonStringify(target, initParent = [target]) {
+  let type = getType(target)
+  let iterableList = ['Object', 'Array', 'Arguments', 'Set', 'Map']
+  let specialList = ['Undefined', 'Symbol_basic', 'Function']
+  // 如果是基本数据类型
+  if (!isObject(target)) {
+    if (type === 'Symbol_basic' || type === 'Undefined') {
+      return undefined
+    } else if (
+      Number.isNaN(target) ||
+      target === Infinity ||
+      target === -Infinity
+    ) {
+      return 'null'
+    } else if (type === 'String') {
+      return `"${target}"`
+    }
+    return String(target)
   }
-  console.log(stack)
-  return stack.reverse().join('') + '.' + nums[1]
+  // 如果是引用数据类型
+  else {
+    let res
+    // 如果是不可以遍历的类型
+    if (!iterableList.includes(type)) {
+      res = processOtherTypes(target, type)
+    }
+    // 如果是可以遍历的类型
+    else {
+      // 如果是数组
+      if (type === 'Array') {
+        res = target.map((item) => {
+          if (specialList.includes(getType(item))) {
+            return 'null'
+          } else {
+            // 检测循环引用
+            let currentParent = [...initParent]
+            // checkCircular(item, currentParent)
+            return jsonStringify(item, currentParent)
+          }
+        })
+        console.log(res);
+        console.log(`[${res}]`);
+        res = `[${res}]`.replace(/'/g, '"')
+      }
+      // 如果是对象字面量、类数组对象、Set、Map
+      else {
+        res = []
+        Object.keys(target).forEach((key) => {
+          // Symbol 类型的 key 直接略过
+          if (getType(key) !== 'Symbol_basic') {
+            let keyType = getType(target[key])
+            if (!specialList.includes(keyType)) {
+              // 检测循环引用
+              let currentParent = [...initParent]
+              // checkCircular(target[key], currentParent)
+              // 往数组中 push 键值对
+              res.push(`"${key}":${jsonStringify(target[key], currentParent)}`)
+            }
+          }
+        })
+        res = `{${res}}`.replace(/'/g, '"')
+      }
+    }
+    return res
+  }
 }
 
-function bar(n) {
-  const s = String(n)
-  let res
-  s.replace(/^(-?)(\d*)((\.)?\d*)/g, (match, s1, s2, s3) => {
-    res = s1 + s2.replace(/\d{1,3}(?=(\d{3})+$)/g, '$&,') + s3
-  })
-  return res
+function getType(o) {
+  return typeof o === 'symbol'
+    ? 'Symbol_basic'
+    : Object.prototype.toString.call(o).slice(8, -1)
 }
-console.log(bar(-1234567890.123))
+
+function isObject(o) {
+  return o !== null && (typeof o === 'object' || typeof o === 'function')
+}
+
+function processOtherTypes(target, type) {
+  switch (type) {
+    case 'String':
+      return `"${target.valueOf()}"`
+    case 'Number':
+    case 'Boolean':
+      return target.valueOf().toString()
+    case 'Symbol':
+    case 'Error':
+    case 'RegExp':
+      return '{}'
+    case 'Date':
+      return `"${target.toJSON()}"`
+    case 'Function':
+      return undefined
+    default:
+      return ''
+  }
+}
+
+console.log(jsonStringify([1, "qwe", null, undefined, Symbol(''), false]))
