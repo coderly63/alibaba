@@ -22,4 +22,4 @@ var removeDuplicateLetters = function (s) {
   }
   return stack.join('')
 }
-console.log(removeDuplicateLetters('cbacdcbc')) // acdb
+console.log(removeDuplicateLetters('abcdadcb'))
