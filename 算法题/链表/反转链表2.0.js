@@ -18,7 +18,6 @@ var reverseN = function (head, n) {
     return head
   }
   const last = reverseN(head.next, n - 1)
-  console.log(next);
   head.next.next = head
   head.next = next
   return last

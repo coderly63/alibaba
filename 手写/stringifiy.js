@@ -1,26 +1,25 @@
-function jsonStringify(obj) {
-  let type = typeof obj;
-  if (type !== "object") {
-    if (/string|undefined|function/.test(type)) {
-      obj = '"' + obj + '"';
-    }
-    return String(obj);
+var myJsonStringify = function (obj) {
+  let type = getType(obj)
+  if (!isObject(obj)) {
+    if (type === 'String') return '"' + obj + '"'
+    else if (type === 'Function' || type === 'Symbol' || type === 'Undefined') return 'null'
+    else return String(obj)
   } else {
-    let json = []
-    let arr = Array.isArray(obj)
-    for (let k in obj) {
-      let v = obj[k];
-      let type = typeof v;
-      if (/string|undefined|function/.test(type)) {
-        v = '"' + v + '"';
-      } else if (type === "object") {
-        v = jsonStringify(v);
+    let res = []
+    if (type === 'Array') {
+      for (const key in obj) {
+        if (Object.hasOwnProperty.call(obj, key)) {
+          const value = obj[key];
+          res.push()
+        }
       }
-      json.push((arr ? "" : '"' + k + '":') + String(v));
     }
-    return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}")
   }
 }
-// console.log(jsonStringify({ x: 5 })); // "{"x":5}"
-console.log(jsonStringify([1, "false", false, [3, 4], {'a': 123}])); // "[1,"false",false]"
-// console.log(jsonStringify({ b: undefined })); // "{"b":"undefined"}"
+
+function getType(obj) {
+  return Object.prototype.toString.call(obj).slice(8, -1)
+}
+function isObject(obj) {
+  return Object.prototype.toString.call(obj) === 'object'
+}
