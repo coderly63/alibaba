@@ -15,12 +15,10 @@ var findAnagrams = function (s, p) {
     arr1[p[i].charCodeAt() - 'a'.charCodeAt()]++
     arr2[s[i].charCodeAt() - 'a'.charCodeAt()]++
   }
-  console.log(arr1.join(''), arr2.join(''), arr1.join('') === arr2.join(''));
   if (arr1.join('') === arr2.join('')) res.push(l)
   for (let r = n; r < m; r++) {
     arr2[s[l++].charCodeAt() - 'a'.charCodeAt()]--
     arr2[s[r].charCodeAt() - 'a'.charCodeAt()]++
-    console.log(l);
     if (arr1.join('') === arr2.join('')) res.push(l)
   }
   return res
