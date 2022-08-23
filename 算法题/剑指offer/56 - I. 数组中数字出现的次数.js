@@ -17,6 +17,6 @@ var singleNumbers = function (nums) {
   }
   return [x, y]
 };
-// [1,10,4,1,4,3,3] ===> [2, 10]
+// [1,2,10,4,1,4,3,3] ===> [2, 10]
 const arr = [1, 2, 10, 4, 1, 4, 3, 3]
 console.log(singleNumbers(arr));
