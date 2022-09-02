@@ -16,17 +16,19 @@ var letterCombinations = function (digits) {
 
   const res = [];
   if (digits === "") return res;
-  const backTrack = function (i, combinations) {
-    // 递归出口
-    if (i === digits.length) {
-      return res.push(combinations);
+  const dfs = function (index, path) {
+    if (index === digits.length) {
+      res.push(path.join(''))
+      return
     }
-    const arr = phone[digits[i]];
-    for (let j = 0; j < arr.length; j++) {
-      backTrack(i + 1, combinations + arr[j]);
+    const arr = phone[digits[index]]
+    for (let i = 0; i < arr.length; i++) {
+      path.push(arr[i])
+      dfs(index + 1, path)
+      path.pop()
     }
-  };
-  backTrack(0, "");
-  return res;
+  }
+  dfs(0, [])
+  return res
 };
-letterCombinations("23");
+console.log(letterCombinations("23"));

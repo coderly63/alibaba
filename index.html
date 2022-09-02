@@ -20,16 +20,12 @@
     </div>
   </body>
   <script>
-    function a() {
-      this.x = 'hello'
+    function Person() {
+      this.name = '123'
     }
-    a.prototype.x = 'world'
-    console.log(a.x)
-    delete a.x
-    console.log(a.x)
-    delete a.x
-    console.log(a.x)
-    a.x = 'undefined'
-    console.log(a.x)
+    const p = new Person()
+    console.log(p)
+    console.log(Object.create(p.__proto__))
+    console.log(Object.getPrototypeOf(p.__proto__))
   </script>
 </html>

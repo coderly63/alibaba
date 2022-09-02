@@ -7,18 +7,16 @@ var subsetsWithDup = function (nums) {
   const visited = new Array(n).fill(0)
   nums.sort((a, b) => a - b)
   const res = []
-  const dfs = function (index, path, visited) {
+  const dfs = function (index, path) {
     res.push([...path])
     for (let i = index; i < n; i++) {
-      if (i !== 0 && nums[i] === nums[i - 1] && !visited[i - 1]) continue
-      visited[i] = 1
+      if (i !== index && nums[i] === nums[i - 1]) continue
       path.push(nums[i])
-      dfs(i + 1, path, visited)
-      visited[i] = 0
+      dfs(i + 1, path)
       path.pop()
     }
   }
-  dfs(0, [], visited)
+  dfs(0, [])
   return res
 }
 

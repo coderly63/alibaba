@@ -24,6 +24,7 @@
         console.log('father is saying');
       }
       const proto = Object.create(Son.prototype)
+      console.log('proto', proto)
       proto.constructor = Son
       Father.prototype = proto
       console.log('proto', proto)
