@@ -33,4 +33,4 @@ var minWindow = function (s, t) {
   return res
 }
 
-console.log(minWindow('ab', 'b'));
+console.log(minWindow('ADOBECODEBANC', 'ABC'));

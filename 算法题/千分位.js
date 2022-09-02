@@ -1,21 +1,28 @@
 var formate = function (n) {
-  const nums = String(n).split('.')
-  const s1 = nums[0]
-  let stack = [s1[s1.length - 1]]
-  let index = 1
-  for (let i = s1.length - 2; i >= 0; i--) {
-    if (index++ % 3 === 0) stack.push(',')
-    stack.push(s1[i])
+  let s = String(n)
+  let s1 = '', s2 = '', s3 = ''
+  if (s[0] === '-') {
+    s1 = '-'
+    s = s.slice(1)
   }
-  console.log(stack.reverse().join('') + '.' + nums[1])
+  s2 = s.split('.')[0]
+  s3 = s.split('.')[1] ? '.' + s.split('.')[1] : ''
+  const res = []
+  let index = 0
+  for (let i = s2.length - 1; i >= 0; i--) {
+    res.push(s2[i])
+    index += 1
+    if (i !== s2.length - 1 && index % 3 === 0) res.push(',')
+  }
+  console.log(s1 + res.reverse().join('') + s3);
 }
 
-var formate = function (n) {
-  const str = String(n)
-  const res = str.replace(/^(-?)(\d+)(\.?(\d*))$/, (match, s1, s2, s3) => {
-    const t = s2.replace(/\d{1,3}(?=(\d{3})+$)/g, '$&,')
-    console.log(t);
-  })
-}
+// var formate = function (n) {
+//   const s = String(n)
+//   const res = s.replace(/^(-?)(\d*)(\.\d*)$/, (match, s1, s2, s3) => {
+//     return s1 + s2.replace(/\d{1,3}(?=(\d{3})+$)/ig, '$&,') + s3
+//   })
+//   return res
+// }
 
 console.log(formate(-12323455.45667)) // 12,323.45`
