@@ -1,6 +1,6 @@
 function numberConversion(num, base) {
   const dict = {}
-  for (let i = 0; i <= base; i++) {
+  for (let i = 0; i < base; i++) {
     if (i < 10) dict[i] = i
     else {
       const c = String.fromCharCode(87 + i)

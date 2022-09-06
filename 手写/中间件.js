@@ -1,19 +1,24 @@
+
 // 定义几个中间间函数
-const m1 = (req, res, next) => {
-  setTimeout(() => {
-    console.log('m1 run')
-    next()
-  }, 2000);
+const m1 = async (req, res, next) => {
+  console.log('m1 run')
+  await next()
+  console.log('m1 end');
 }
 
-const m2 = (req, res, next) => {
+const m2 = async (req, res, next) => {
   console.log('m2 run')
-  next()
+  await getPromise(4, 500)
+  const m3Res = await next()
+  console.log('m2 ~ m3Res', m3Res)
+  console.log('m2 end');
 }
 
-const m3 = (req, res, next) => {
+const m3 = async (req, res, next) => {
   console.log('m3 run')
-  next()
+  await next()
+  console.log('m3 end');
+  return '9999999'
 }
 
 // 中间件集合
@@ -32,6 +37,11 @@ function useApp(req, res) {
 // 第一次请求流进入
 useApp()
 
-Promise.resolve(Promise.resolve(Promise.resolve(Promise.resolve(2)))).then(res => {
-  console.log(res);
-})
+function getPromise(value, delay) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log(value);
+      resolve(value)
+    }, delay);
+  })
+}

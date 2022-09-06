@@ -1,5 +1,6 @@
-function foo() {
-  console.log(123);
+function foo () {
+  var a = 123
+  console.log(a);
 }
-
-new Function('return ' + foo.toString())()
+foo()
+console.log(a);
