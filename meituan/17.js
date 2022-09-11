@@ -1,20 +1,27 @@
-const lines = read_line().split(' ')
-const n = parseInt(lines[0])
-const k = parseInt(lines[1])
-const arr = read_line().split(' ')
-arr.sort((a, b) => a - b)
-let res = 0
-for (let i = 0; i < n; i++) {
-  let l = 0, r = n - 1
-  while (l <= r) {
-    const mid = Math.floor((l + r) / 2)
-    if (arr[i] * arr[mid] >= k) {
-      r = mid - 1
-    } else {
-      l = mid + 1
-    }
+function minOperations(str) {
+  const n = str.length
+  const dp = new Array(26).fill(0)
+  let res = 0
+  for (const c of str) {
+    dp[c.charCodeAt() - 'a'.charCodeAt()] += 1
   }
-  if (r + 1 <= i) res--
-  res += n - 1 - r
+  let t = 1
+  while (t) {
+    t = 0
+    for (let i = 0; i < 26; i++) {
+      if (dp[i] > 1) {
+        t = 1
+        dp[i] -= 2
+        break
+      }
+    }
+    if (!t) break
+    let idx = 0
+    for (let i = 0; i < 26; i++) {
+      if (dp[i] < dp[idx]) idx = i
+    }
+    res += 1
+    dp[idx] += 1
+  }
+  return res
 }
-console.log(res);

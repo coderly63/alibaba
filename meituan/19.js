@@ -1,30 +1,28 @@
-const line = read_line().split(' ')
-const n = parseInt(line[0])
-const m = parseInt(line[1])
-const k = parseInt(line[2])
+function TreeNode(x) {
+  this.val = x;
+  this.left = null;
+  this.right = null;
+}
+function getBinaryTrees(preOrder, inOrder) {
+  const res = []
+  const n = preOrder.length
+  if (n <= 0) return [null]
+  const rootVal = preOrder[0]
+  for (let i = 0; i < n; i++) {
+    if (rootVal !== inOrder[i]) continue
+    const left = getBinaryTrees(preOrder.slice(1, i + 1), inOrder.slice(0, i))
+    const right = getBinaryTrees(preOrder.slice(i + 1), inOrder.slice(i + 1))
+    console.log(rootVal, i, inOrder[i]);
+    for (const l of left) {
+      for (const r of right) {
+        const root = new TreeNode(rootVal)
+        root.left = l
+        root.right = r
+        res.push(root)
+      }
+    }
+  }
+  return res
+}
 
-const dp = new Array(k).fill(0).map(() => new Array(4).fill(0))
-for (let i = 0; i < k; i++) {
-  for (let j = 0; j < 4; j++) {
-    dp[i][j] = readInt()
-  }
-}
-let res = 0
-function check(t) {
-  let sum = 0
-  for (let i = 0; i < dp.length; i++) {
-    const arr = dp[i]
-    if (t[arr[1] - 1] - t[arr[0] - 1] === arr[2]) sum += arr[3]
-  }
-  res = Math.max(sum, res)
-}
-function dfs(t, index) {
-  if (t.length === n) return check(t)
-  for (let i = index; i <= m; i++) {
-    t.push(i)
-    dfs(t, i)
-    t.pop()
-  }
-}
-dfs([], 1)
-console.log(res);
+console.log(getBinaryTrees([1, 1, 2], [1, 2, 1]));

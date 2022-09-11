@@ -18,14 +18,12 @@
     <div class="container">
       <div class="triangle"></div>
     </div>
+    <span>123</span>
   </body>
   <script>
-    function Person() {
-      this.name = '123'
-    }
-    const p = new Person()
-    console.log(p)
-    console.log(Object.create(p.__proto__))
-    console.log(Object.getPrototypeOf(p.__proto__))
+    setInterval(() => {
+      console.log(window.outerWidth)
+      console.log(window.innerWidth )
+    }, 2000)
   </script>
 </html>
