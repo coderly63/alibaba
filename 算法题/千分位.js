@@ -12,7 +12,7 @@ var formate = function (n) {
   for (let i = s2.length - 1; i >= 0; i--) {
     res.push(s2[i])
     index += 1
-    if (i !== s2.length - 1 && index % 3 === 0) res.push(',')
+    if (i !== s2.length - 1 && index % 3 === 0 && i !== 0) res.push(',')
   }
   console.log(s1 + res.reverse().join('') + s3);
 }
