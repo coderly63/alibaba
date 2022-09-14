@@ -10,7 +10,7 @@ var combinationSum2 = function (candidates, target) {
     if (target === 0) return res.push([...path])
     else if (target < 0) return
     for (let i = index; i < candidates.length; i++) {
-      if (i > 0 && candidates[i] === candidates[i - 1] && i !== index) break
+      if (candidates[i] === candidates[i - 1] && i > index) continue
       path.push(candidates[i])
       dfs(candidates, target - candidates[i], path, i + 1)
       path.pop()
@@ -18,4 +18,4 @@ var combinationSum2 = function (candidates, target) {
   }
   dfs(candidates, target, [], 0)
   return res
-};
+}
