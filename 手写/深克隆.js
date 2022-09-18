@@ -1,40 +1,46 @@
-const clone = function (parent) {
-  const parents = []
-  const childs = []
-  const _clone = function (parent) {
-    let child = {}
-    if (typeof parent !== 'object') return parent
-    else if (parent instanceof Array) child = []
-    else if (Object.prototype.toString.call(parent) === '[object Date]')
-      child = new Date(parent.getTime())
-    else if (Object.prototype.toString.call(parent) === '[object RegExp]')
-      child = new RegExp(child.source, child.flags)
-    else child.__proto__ = Object.create(parent.__proto__)
-    const index = parents.indexOf(parent)
-    if (index > -1) return childs[index]
-    parents.push(parent)
-    childs.push(child)
-    for (const key in parent) {
-      if (Object.hasOwnProperty.call(parent, key)) {
-        child[key] = _clone(parent[key])
-      }
-    }
-    return child
+const deepClone = (parent) => {
+  if (typeof parent !== 'object' || parent === null) return parent
+  else if (typeof parent === 'function') {
+    const bar = new Function('return ' + parent())()
+    console.log('deepClone ~ bar', bar)
   }
-  return _clone(parent)
+  let child = {}
+  const type = getType(parent)
+  if (type === 'Array') child = []
+  else if (type === 'RegExp') {
+    return new RegExp(parent.source, parent.flags)
+  } else if (type === 'Date') return new Date(parent.getTime())
+  else child.__proto__ = Object.create(parent.__proto__)
+  for (const key in parent) {
+    if (Object.hasOwnProperty.call(parent, key)) {
+      child[key] = deepClone(parent[key])
+    }
+  }
+  return child
+}
+
+function getType(obj) {
+  return Object.prototype.toString.call(obj).slice(8, -1)
+}
+
+const foo = function () {
+  console.log(123)
 }
 
 const obj = {
   a: 123,
-  b: 'fasdf',
-  c: {
-    d: Date.now(),
-    e: /abc/ig,
-    f: {
-      g: 'gggg',
-    },
+  b: '123',
+  c: foo,
+  d: /123/gi,
+  e: {
+    f: '12313213',
+    g: [1, 2, 3, '123'],
   },
+  h: Date.now(),
 }
 
-const cloneObj = clone(obj)
-console.log('cloneObj', cloneObj)
+const copyObj = deepClone(obj)
+obj.e.g[0] = 999
+console.log(obj)
+console.log(copyObj)
+console.log(obj.c === copyObj.c)

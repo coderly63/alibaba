@@ -1,12 +1,17 @@
 var longestValidParentheses = function (s) {
   const stack = []
   let res = 0
-  for (const k of s) {
-    if (k === '(') stack.push('(')
-    else if (stack.length) {
+  let sum = 0
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === ')' && !stack.length) {
+      sum = 0
+    } else if (s[i] === '(') {
+      stack.push('(')
+    } else {
       stack.pop()
-      res += 2
+      sum += 2
+      res = Math.max(res, sum)
     }
   }
   return res
-};
+}

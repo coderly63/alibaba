@@ -9,6 +9,7 @@ const myAjax = function (url) {
       if (xhr.status === 200 || xhr.status === 304) resolve(xhr.responseText)
       else reject(new Error(xhr.responseText))
     }
+    xhr.send()
   })
 }
 

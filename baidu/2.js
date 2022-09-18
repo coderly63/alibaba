@@ -1,16 +1,20 @@
-const n = parseInt(readline())
-for (let i = 0; i < n; i++) {
-  const s = readline()
-  let n1 = 0,
-    n2 = 0
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === '1') n1 += 1
-    else n2 += 1
-  }
-  if (n1 === 0 || n2 === 0) {
-    console.log('Yes')
-    continue
-  }
-  if (n1 % 2 === 0 || n2 % 2 === 0) console.log('Yes')
-  else console.log('No')
+const line = read_line()
+const time = line.split(' ')
+console.log(formateTime(parseInt(time[0]), line.slice(14)))
+function formateTime(timestamp, format) {
+  const date = new Date(timestamp)
+  const Y = date.getFullYear().toString()
+  const m = (date.getMonth() + 1).toString()
+  const d = date.getDate().toString()
+  const H = date.getHours().toString()
+  const M = date.getMinutes().toString()
+  const S = date.getSeconds().toString()
+  const res = format
+    .replace(/yyyy/gi, Y)
+    .replace(/MM/gi, m)
+    .replace(/dd/gi, d)
+    .replace(/HH/gi, H)
+    .replace(/mm/gi, M)
+    .replace(/ss/gi, S)
+  return res
 }
