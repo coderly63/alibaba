@@ -2,39 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Title</title>
-
-    <style>
-      .triangle {
-        margin: 100px;
-        width: 160px;
-        height: 200px;
-        background-color: skyblue;
-        clip-path: polygon(0 0, 0% 100%, 100% 50%);
-      }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
   </head>
   <body>
-    <div class="container">
-      <div class="triangle"></div>
-    </div>
-    <span>123</span>
-  </body>
-  <script>
-    class Model {
-      constructor () {
-        this.age = 123
-      }
-      // 实例成员
-      method1() {}
-      method2 = () => {}
-      foo = 'tom'
+    <div>123</div>
+    <script>
+      const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          console.log('observer ~ entry', entry)
+          const FID = entry.processingStart - entry.startTime
 
-      // 静态成员
-      static method3() {}
-      static method4 = () => {}
-    }
-    console.log([Model])
-    console.log(new Model())
-  </script>
+          console.log('FID:', FID)
+        }
+      })
+
+      // Start observing first-input entries.
+
+      observer.observe({ entryTypes: ['first-input'] })
+
+      // observer.observe({
+      //   type: 'first-input',
+
+      //   buffered: false,
+      // })
+    </script>
+  </body>
 </html>

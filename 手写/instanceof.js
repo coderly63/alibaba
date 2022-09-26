@@ -4,6 +4,7 @@ const myInstanceof = function (left, right) {
     if (left === right.prototype) return true
     left = left.__proto__
   }
+  return false
 }
 
 console.log(myInstanceof(new String('abc'), String));

@@ -81,8 +81,8 @@
             const result = callback(that.data);
             if (result instanceof Promise) {
               result.then(
-                (value) => resolve(value),
-                (reason) => reject(reason)
+                (value) => resolve(value), // resolve
+                (reason) => reject(reason) // reject
               );
             } else {
               resolve(result);
