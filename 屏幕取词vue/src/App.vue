@@ -19,14 +19,15 @@ let obj = {
   date: new Date(),
   fn: () => {},
   arr: [1, 2, 5],
-  picture: 'https://ydlunacommon-cdn.nosdn.127.net/0ad7a2439559c55e154c1118a60f2a0d.png',
+  picture:
+    'https://ydlunacommon-cdn.nosdn.127.net/0ad7a2439559c55e154c1118a60f2a0d.png',
 }
 const jsonData = reactive(obj)
 const fileList = ref()
 const fileChange = function (e) {
-  console.log(e.target.files);
-  e.target.files = e.target.files.slice[0, 2]
-  console.log(e.target.files);
+  console.log(e.target.files)
+  e.target.files = e.target.files.slice[(0, 2)]
+  console.log(e.target.files)
 }
 </script>
 
