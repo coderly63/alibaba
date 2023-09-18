@@ -20,3 +20,4 @@ A(2)
 // }
 // foo()
 // bar()
+console.log('master 在index.js增加一行代码')
