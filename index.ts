@@ -23,3 +23,4 @@ console.log(dog)
 // Dog, 在吃饭
 // Dog, 在睡觉
 // Dog, 在打豆豆
+console.log(456)
