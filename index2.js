@@ -30,3 +30,4 @@ while ((s = read_line()) != '') {
   }
   console.log(res)
 }
+console.log('master在index2.js增加一行用于测试')
