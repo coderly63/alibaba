@@ -20,6 +20,3 @@ A(2)
 // }
 // foo()
 // bar()
-console.log(999888)
-console.log(999)
-console.log(666)
