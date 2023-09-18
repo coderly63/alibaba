@@ -1,6 +1,22 @@
-function foo () {
-  var a = 123
-  console.log(a);
+var a = 0,
+  b = 0
+function A(a) {
+  A = function (b) {
+    console.log('a, b', a, b)
+    console.log(a + b++)
+  }
+  console.log(a++)
 }
-foo()
-console.log(a);
+A(1)
+A(2)
+
+// let a = 12,
+//   bar
+// function foo() {
+//   a = 99
+//   bar = function () {
+//     console.log(a)
+//   }
+// }
+// foo()
+// bar()
