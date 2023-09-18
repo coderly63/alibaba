@@ -31,3 +31,4 @@ while ((s = read_line()) != '') {
   console.log(res)
 }
 console.log('master')
+console.log('master')
