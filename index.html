@@ -1,32 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <style>
+      .box {
+        position: relative;
+      }
+      .foo {
+        width: 50px;
+        height: 50px;
+        background-color: aquamarine;
+        color: red;
+        will-change: transform;
+      }
+    </style>
   </head>
   <body>
-    <div>123</div>
-    <script>
-      const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          console.log('observer ~ entry', entry)
-          const FID = entry.processingStart - entry.startTime
-
-          console.log('FID:', FID)
-        }
-      })
-
-      // Start observing first-input entries.
-
-      observer.observe({ entryTypes: ['first-input'] })
-
-      // observer.observe({
-      //   type: 'first-input',
-
-      //   buffered: false,
-      // })
-    </script>
+    <div class="box"></div>
   </body>
+  <script>
+    const styleStr = (obj) => {
+      const arr = []
+      Object.keys(obj).forEach((key) => {
+        let newKey = key.replace(/[A-Z]/g, '-$&').toLowerCase()
+        if (/^webkit/.test(newKey)) {
+          newKey = '-' + newKey
+        }
+        arr.push(`${newKey}:${obj[key]}`)
+      })
+      return arr.join(';')
+    }
+    const foo = document.createElement('div')
+    foo.innerText = '123455'
+    const bar = {
+      fontSize: '13px',
+      textShadow:
+        'text-shadow: \n      rgba(0, 0, 0, 0.8) 1px 0px 1px,\n      rgba(0, 0, 0, 0.8) 0px 1px 1px, \n      rgba(0, 0, 0, 0.8) 0px -1px 1px, \n      rgba(0, 0, 0, 0.8) -1px 0px 1px;',
+      color: 'red',
+      left: '1205px',
+      transform: 'translateX(1226.609375px)',
+      transition: 'transform 5257.051324630202ms linear 0ms',
+      top: '30px',
+    }
+    foo.style.cssText = styleStr(bar)
+    document.body.appendChild(foo)
+  </script>
 </html>
