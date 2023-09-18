@@ -32,3 +32,5 @@ while ((s = read_line()) != '') {
 }
 console.log('master')
 console.log('master')
+console.log('master')
+console.log('master')
