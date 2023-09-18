@@ -20,8 +20,3 @@ A(2)
 // }
 // foo()
 // bar()
-console.log(999888)
-console.log('test 增加一行代码')
-console.log(999)
-console.log(666)
-console.log('test在index.js增加一行用于测试')
