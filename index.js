@@ -20,3 +20,4 @@ A(2)
 // }
 // foo()
 // bar()
+console.log('test')
